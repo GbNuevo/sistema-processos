@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Sky IT BPM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #0077FF, #002b80);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-container h2 {
+      color: #002b80;
+      margin-bottom: 10px;
+    }
+
+    .login-container p {
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .login-container input[type="email"],
+    .login-container input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0077FF;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 16px;
+    }
+
+    .login-container button:hover {
+      background-color: #005ccc;
+    }
+
+    .login-container .links {
+      text-align: right;
+      font-size: 0.9em;
+    }
+
+    .login-container .links a {
+      text-decoration: none;
+      color: #0077FF;
+    }
+
+    .login-container .links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Bem-vindo à Sky IT BPM</h2>
+    <p>Faça login para acessar o sistema</p>
+
+    <input type="email" id="email" placeholder="E-mail" required />
+    <input type="password" id="senha" placeholder="Senha" required />
+    <button onclick="fazerLogin()">Entrar</button>
+
+    <div class="links">
+      <a href="tela_recuperar_senha_skyit_bpm.html">Recuperar senha</a>
+    </div>
+  </div>
+
+  <script>
+    function fazerLogin() {
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+
+      if (usuario) {
+        alert("Login bem-sucedido!");
+        // Em breve: redirecionamento baseado na empresa
+      } else {
+        alert("E-mail ou senha incorretos.");
+      }
+    }
+  </script>
+
+</body>
+</html>
