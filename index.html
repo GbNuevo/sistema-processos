@@ -1,85 +1,13 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - Sky IT BPM</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #007bff, #003b80);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .login-container {
-      background-color: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      text-align: center;
-      width: 100%;
-      max-width: 400px;
-    }
-    input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-  <div class="login-container">
-    <h2>Bem-vindo à <strong>Sky IT BPM</strong></h2>
-    <p>Faça login para acessar o sistema</p>
-    <input type="email" id="email" placeholder="E-mail" /><br />
-    <input type="password" id="password" placeholder="Senha" /><br />
-    <button onclick="login()">Entrar</button>
-    <p id="status" style="color:red; margin-top:10px;"></p>
-  </div>
-
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB-kQ0...substituir",
-      authDomain: "sky-it-bpm.firebaseapp.com",
-      projectId: "sky-it-bpm",
-      storageBucket: "sky-it-bpm.appspot.com",
-      messagingSenderId: "XXX",
-      appId: "1:XXX:web:XXX"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    window.login = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const status = document.getElementById("status");
-
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          status.style.color = "green";
-          status.innerText = "Login bem-sucedido!";
-          window.location.href = "dashboard_skytech.html";
-        })
-        .catch((error) => {
-          status.innerText = "Erro ao fazer login. Verifique as credenciais.";
-        });
-    }
-  </script>
-</body>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sky IT BPM</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.jsx"></script>
+  </body>
 </html>
