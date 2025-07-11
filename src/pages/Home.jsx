@@ -1,23 +1,23 @@
 
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { getAuth, signOut } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+function Home() {
+  const auth = getAuth();
   const navigate = useNavigate();
-  const logout = async () => {
+
+  const handleLogout = async () => {
     await signOut(auth);
-    navigate("/");
+    navigate('/');
   };
+
   return (
-    <div style={{ color: "#fff", textAlign: "center" }}>
-      <h1>Você está logado!</h1>
-      <button onClick={logout} style={{
-        padding: "10px 20px", borderRadius: 5, border: "none",
-        cursor: "pointer"
-      }}>Sair</button>
+    <div style={{ padding: 30 }}>
+      <h2>Bem-vindo!</h2>
+      <button onClick={handleLogout}>Sair</button>
     </div>
   );
-};
+}
 
 export default Home;

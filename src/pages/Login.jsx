@@ -1,81 +1,48 @@
 
-import { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+function Login() {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    const auth = getAuth();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/home");
+      await signInWithEmailAndPassword(auth, email, senha);
+      navigate('/home');
     } catch (err) {
-      setError("Email ou senha inválidos.");
+      setErro('Email ou senha inválidos.');
     }
   };
 
   return (
-    <div className="login-card" style={styles.card}>
-      <h2>Bem-vindo à <strong>Sky IT BPM</strong></h2>
-      <p>Faça login para acessar o sistema</p>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <div style={{ padding: 30 }}>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="E-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
           required
-        />
+        /><br/><br/>
         <input
           type="password"
           placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
           required
-        />
-        <button type="submit" style={styles.button}>Entrar</button>
+        /><br/><br/>
+        <button type="submit">Entrar</button>
       </form>
+      {erro && <p style={{ color: 'red' }}>{erro}</p>}
     </div>
   );
-};
-
-const styles = {
-  card: {
-    background: "white",
-    padding: 40,
-    borderRadius: 10,
-    boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-    width: "100%",
-    maxWidth: 400,
-    textAlign: "center",
-  },
-  input: {
-    width: "100%",
-    padding: 10,
-    marginBottom: 15,
-    border: "1px solid #ccc",
-    borderRadius: 5,
-    fontSize: 14,
-  },
-  button: {
-    backgroundColor: "#007bff",
-    color: "white",
-    border: "none",
-    padding: "10px 0",
-    width: "100%",
-    borderRadius: 5,
-    fontSize: 16,
-    cursor: "pointer",
-  },
-};
+}
 
 export default Login;
